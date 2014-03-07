@@ -19,3 +19,6 @@ courtPlot$set(
   colors = RColorBrewer::brewer.pal(n=8,"PRGn")
 )
 courtPlot
+
+
+courtPlot$save("index.html",cdn=T)
