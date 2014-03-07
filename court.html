@@ -162,6 +162,19 @@
 <script>
   var svg = d3.select("svg")
   svg.selectAll("path, rect")
+    .on("mouseover", fillit)
+    .on("mouseout", emptyit);
+    
+  function fillit(){
+    console.log(d3.event);
+    console.log(this)
+  }
+  
+  function emptyit(){
+    console.log(d3.event);
+    console.log(this)
+  }  
+    
 </script>
 </body>
 
