@@ -5,3 +5,4 @@ basketball:
   cdn:
     jshead:
       - http://d3js.org/d3.v3.js
+      - http://timelyportfolio.github.io/rCharts_basketball/js/d3.tip.v0.6.3.js
