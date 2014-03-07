@@ -6,8 +6,9 @@
 </head>
 
 <body>
+<div>
   <svg width="744.09448" height="1052.3622" id="court">
-  <g id="layer1">
+    <g id="layer1">
       <rect
          width="579.78723"
          height="488.29788"
@@ -158,9 +159,13 @@
          style="fill:none;stroke:#48ab18;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     </g>
   </svg>
+</div>
 
 <script>
+
   var svg = d3.select("svg")
+  
+  
   svg.selectAll("path, rect")
     .on("mouseover", fillit)
     .on("mouseout", emptyit);

@@ -1,56 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   version="1.1"
-   width="684.28723"
-   height="593.86169"
-   id="svg2">
-  <defs
-     id="defs4">
-    <inkscape:path-effect
-       effect="spiro"
-       id="path-effect3831" />
-    <inkscape:path-effect
-       effect="spiro"
-       id="path-effect3825" />
-    <inkscape:path-effect
-       effect="spiro"
-       id="path-effect3821" />
-    <inkscape:path-effect
-       effect="spiro"
-       id="path-effect3817" />
-    <inkscape:path-effect
-       effect="spiro"
-       id="path-effect3813" />
-    <inkscape:path-effect
-       effect="spiro"
-       id="path-effect3809" />
-    <inkscape:path-effect
-       effect="spiro"
-       id="path-effect3805" />
-  </defs>
-  <metadata
-     id="metadata7">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <g
-     transform="translate(0,31.499512)"
-     id="layer1">
+<div id = {{ chartId }}>
+  <svg width="684.28723" height="593.86169" id = "court">
+  <g id="layer1">
     <rect
        width="579.78723"
        height="488.29788"
@@ -201,3 +151,52 @@
        style="fill:none;stroke:#48ab18;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
   </g>
 </svg>
+</div>
+
+<script>
+  var params = {{{ chartParams }}}
+  var svg = d3.select("svg")
+  tip = d3.tip().html(function(d) { return d.key + ":" + d3.format(".2%")(d.value) ; });
+
+  /* Invoke the tip in the context of your visualization */
+  svg.call(tip)
+  
+  //match the data with the regions
+  svg.selectAll("path, rect")[0].forEach(function(region){
+    //get the shape with d3
+    var regionShape = d3.select(region)
+    //look for the id of the shape in the data
+    var dataid = d3.values(params.data.region).indexOf(regionShape.attr("id"))
+    //if id is greater than 0 then we found the id in data
+    //in this example we found a region
+    if (dataid >= 0) {
+      regionShape.datum(
+        {"key": regionShape.attr("id"),
+          "value" : params.data[ params.y ][dataid]
+        }
+      )
+      .attr("class","regionData")
+    }
+  })
+  
+  //thanks http://stackoverflow.com/questions/17671252/d3-create-a-continous-color-scale-with-many-strings-inputs-for-the-range-and-dy
+  var heatmapColor = d3.scale.linear()
+    .domain(d3.range(0, 1, 1.0 / (params.colors.length - 1)))
+    .range(params.colors);
+  
+  //redundant for now
+  //but might need this in the future
+  var c = d3.scale.linear().domain([0,1]).range([0,1]);
+    
+  svg.selectAll(".regionData")
+    .style("fill", function(d) {
+      return heatmapColor(c(d.value));
+    })
+    .on("mouseover", tip.show)
+    .on("mouseout", tip.hide);
+    
+    
+</script>
+</body>
+
+</html>

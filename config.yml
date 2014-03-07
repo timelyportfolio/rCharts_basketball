@@ -1,0 +1,7 @@
+basketball:
+  jshead:
+    - js/d3.v3.js
+    - js/d3.tip.v0.6.3.JS
+  cdn:
+    jshead:
+      - http://d3js.org/d3.v3.js
