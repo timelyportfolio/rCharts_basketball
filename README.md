@@ -11,7 +11,8 @@ Very crude prototype in response to a [tweet](https://twitter.com/DSMok1">@DSMok
 Purpose of this repo is to demo both the capabilities of [d3](http://d3js.org)/svg and how to access those powerful abilities with [rCharts](http://rcharts.io/gallery).  Start to finish from nothing only took about 2 hours.  Given a day, this could be a really neat little chart.
 
 [Live example](http://timelyportfolio.github.io/rCharts_basketball)    
-[Sample R code](./code.R)
+[Live example with Angular](http://timelyportfolio.github.io/rCharts_basketball/index_angular.html)    
+[Sample R code](./code.R)    
 
 ### Screenshot
 ![screenshot img](screenshot.png)
